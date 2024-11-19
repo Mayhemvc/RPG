@@ -1,19 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 
 struct Personagem {
 	char nome[50];
 	char classe[20];
 	int forca;
 	int defesa;
-	int agilidade;
 	int vida; 
 };
 
 struct Cenario {
 	char nome[50];
 	char descricao[200];
+	Personagem inimigos[2];
+    Personagem aliado;
 };
 
 struct jogador {
@@ -44,14 +45,37 @@ int menu(){
 	
 }
 
+void salvar(Personagem jogador) {
+	FILE* fptr;
+	char dados[50];
+	
+	fptr = fopen("arquivo.txt", "r");
+	
+	if (fptr == NULL) {
+		printf("Falha ao abrir o arquivo.");
+	}
+	else {
+		printf("O arquivo foi aberto. \n");
+		
+		while(fgets(dados, 50, fptr) != NULL) {
+			printf("%s", dados);
+		}
+		
+		fclose(fptr);
+		
+		printf("Dados lidos com sucesso. \n");
+	}
+}
+
+
 
 int main() {
 
-    struct Personagem p1 = {"Ragnar", "Barbaro", 8, 8, 3, 100};
-    struct Personagem p2 = {"Eva", "Arqueiro", 4, 3, 9, 100};
-    struct Personagem p3 = {"Seraphine", "Mago", 7, 4, 5, 100};
-    struct Personagem p4 = {"Steve", "Ladino", 3, 4, 9, 100};
-    struct Personagem p5 = {"Edmundo", "Guerreiro", 7, 7, 5, 100};
+    struct Personagem p1 = {"Ragnar", "Barbaro", 10, 5, 125};
+    struct Personagem p2 = {"Eva", "Arqueiro", 4, 3, 100};
+    struct Personagem p3 = {"Seraphine", "Mago", 7, 4, 100};
+    struct Personagem p4 = {"Steve", "Ladino", 3, 4, 100};
+    struct Personagem p5 = {"Edmundo", "Guerreiro", 7, 7, 130};
 	struct Cenario c1 = {"Floresta_Negra", "Nesta floresta muitos ja entraram, porem, poucos conseguiram sair. Ha uma lenda que nessa floresta habita um ser mitologico que caca exploradores."};	
     struct Cenario c2 = {"Nome", "Descricao"};
     struct Cenario c3 = {"Nome", "Descricao"};
@@ -72,8 +96,10 @@ int main() {
 	else if(escolha==3){
 		return 0;
 	}
+
+
 	
-	printf("Otima escolha, vamos inicar nossa aventura!\n\n");
+	printf("Otima escolha, vamos iniciar nossa aventura!\n\n");
 	printf("Nossa primeira aventura sera na %s, %s", c1.nome, c1.descricao);
 	
 	
