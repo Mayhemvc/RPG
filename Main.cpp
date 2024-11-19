@@ -52,7 +52,7 @@ int main() {
     struct Personagem p3 = {"Seraphine", "Mago", 7, 4, 5, 100};
     struct Personagem p4 = {"Steve", "Ladino", 3, 4, 9, 100};
     struct Personagem p5 = {"Edmundo", "Guerreiro", 7, 7, 5, 100};
-	struct Cenario c1 = {"Floresta_Negra", "Nesta floresa muitos ja entraram, porem, poucos conseguiram sair. Ha uma lenda que nessa floresta habita um ser mitologico que caca exploradores."};	
+	struct Cenario c1 = {"Floresta_Negra", "Nesta floresta muitos ja entraram, porem, poucos conseguiram sair. Ha uma lenda que nessa floresta habita um ser mitologico que caca exploradores."};	
     struct Cenario c2 = {"Nome", "Descricao"};
     struct Cenario c3 = {"Nome", "Descricao"};
 	
@@ -79,5 +79,5 @@ int main() {
 	
 	
 	
-	return 0;
+	return 0;
 }
