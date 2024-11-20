@@ -17,11 +17,6 @@ struct Cenario {
     Personagem aliado;
 };
 
-struct jogador {
-	int progresso;
-	int personagem;
-};
-
 int menu(){
 	int inicio;
 	
