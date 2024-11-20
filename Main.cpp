@@ -3,102 +3,185 @@
 #include <string.h>
 
 struct Personagem {
-	char nome[50];
-	char classe[20];
-	int forca;
-	int defesa;
-	int vida; 
+    char nome[50];
+    char classe[20];
+    int forca;
+    int defesa;
+    int vida;
 };
 
 struct Cenario {
-	char nome[50];
-	char descricao[200];
-	Personagem inimigos[2];
-    Personagem aliado;
+    char nome[50];
+    char descricao[200];
+    struct Personagem inimigos[2];
+    char historia[500];  
+    char historia_completa[1000];  
 };
 
-int menu(){
-	int inicio;
-	
-	printf("Digite o que gostaria de fazer:\n1.Iniciar\n2.Carregar\n3.Sair.\n");
-	scanf("%d", &inicio);
-	
-	switch (inicio){
-		case 1:
-			printf("\nIniciando o RPG...\n\n");
-			break;
-		case 2:
-			printf("Carregando os dados salvos...\n\n");
-			break;
-		case 3: 
-			printf("Saindo...\n\n");
-		default:
-			printf("Escolha invalida.\n");
-			break;
-	}
-	return inicio;
-	
+
+void criarCenarios(struct Cenario cenarios[]) {
+  
+    strcpy(cenarios[0].nome, "Floresta Negra");
+    strcpy(cenarios[0].descricao, "Nesta floresta muitos ja entraram, porem, poucos conseguiram sair. Ha uma lenda que nessa floresta habita um ser mitologico que caca exploradores.");
+    strcpy(cenarios[0].inimigos[0].nome, "Lobo Selvagem");
+    cenarios[0].inimigos[0].vida = 30;
+    cenarios[0].inimigos[0].forca = 10;
+    cenarios[0].inimigos[0].defesa = 5;
+
+    strcpy(cenarios[0].inimigos[1].nome, "Espectro da Floresta");
+    cenarios[0].inimigos[1].vida = 40;
+    cenarios[0].inimigos[1].forca = 15;
+    cenarios[0].inimigos[1].defesa = 8;
+
+    strcpy(cenarios[0].historia, "Você entrou na Floresta Encantada, onde a natureza parece viver em harmonia com os espíritos. Porém, espreitam nas sombras criaturas selvagens dispostas a caçar qualquer intruso.");
+    strcpy(cenarios[0].historia_completa, "Você entrou na Floresta Encantada, onde a natureza parece viver em harmonia com os espíritos. Porém, espreitam nas sombras criaturas selvagens dispostas a caçar qualquer intruso.\n");
+
+
+    strcpy(cenarios[1].nome, "Caverna Sombria");
+    strcpy(cenarios[1].descricao, "Uma caverna úmida e escura, onde trolls espreitam.");
+    strcpy(cenarios[1].inimigos[0].nome, "Troll das Sombras");
+    cenarios[1].inimigos[0].vida = 50;
+    cenarios[1].inimigos[0].forca = 20;
+    cenarios[1].inimigos[0].defesa = 10;
+
+    strcpy(cenarios[1].inimigos[1].nome, "Morcego Gigante");
+    cenarios[1].inimigos[1].vida = 35;
+    cenarios[1].inimigos[1].forca = 12;
+    cenarios[1].inimigos[1].defesa = 5;
+
+    strcpy(cenarios[1].historia, "A Caverna Sombria é um local traiçoeiro, cheio de umidade e escuridão. Trolls de pele grossa espreitam a cada passo que você dá. O som dos morcegos gigantes ecoa pelos corredores da caverna.");
+    strcpy(cenarios[1].historia_completa, "A Caverna Sombria é um local traiçoeiro, cheio de umidade e escuridão. Trolls de pele grossa espreitam a cada passo que você dá. O som dos morcegos gigantes ecoa pelos corredores da caverna.\n");
+
+
+    strcpy(cenarios[2].nome, "Castelo do Dragão");
+    strcpy(cenarios[2].descricao, "Um castelo antigo onde um dragão imponente guarda seus tesouros.");
+    strcpy(cenarios[2].inimigos[0].nome, "Guarda Esqueleto");
+    cenarios[2].inimigos[0].vida = 40;
+    cenarios[2].inimigos[0].forca = 18;
+    cenarios[2].inimigos[0].defesa = 8;
+
+    strcpy(cenarios[2].inimigos[1].nome, "Dragão Ancião");
+    cenarios[2].inimigos[1].vida = 120;
+    cenarios[2].inimigos[1].forca = 50;
+    cenarios[2].inimigos[1].defesa = 25;
+3
+    strcpy(cenarios[2].historia, "Você chegou ao Castelo do Dragão, onde as paredes de pedra estão cobertas por musgos antigos. O som do fogo do dragão reverbera no ar enquanto ele guarda suas riquezas em um covil imponente.");
+    strcpy(cenarios[2].historia_completa, "Você chegou ao Castelo do Dragão, onde as paredes de pedra estão cobertas por musgos antigos. O som do fogo do dragão reverbera no ar enquanto ele guarda suas riquezas em um covil imponente.\n");
 }
 
-void salvar(Personagem jogador) {
-	FILE* fptr;
-	char dados[50];
-	
-	fptr = fopen("arquivo.txt", "r");
-	
-	if (fptr == NULL) {
-		printf("Falha ao abrir o arquivo.");
-	}
-	else {
-		printf("O arquivo foi aberto. \n");
-		
-		while(fgets(dados, 50, fptr) != NULL) {
-			printf("%s", dados);
-		}
-		
-		fclose(fptr);
-		
-		printf("Dados lidos com sucesso. \n");
-	}
+void mostrarCenario(struct Cenario *cenario) {
+    printf("\n=== %s ===\n", (*cenario).nome);
+    printf("%s\n", (*cenario).descricao);
+    printf("História: \n%s\n", (*cenario).historia);
 }
 
+void contarHistoria(struct Cenario *cenario, int inimigoIndex) {
+    if (inimigoIndex == 0) {
+        strcat((*cenario).historia_completa, "Após vencer o Lobo Selvagem, você segue em frente, mais cauteloso, sabendo que o perigo ainda espreita...\n");
+    } else if (inimigoIndex == 1) {
+        strcat((*cenario).historia_completa, "Com o Espectro da Floresta derrotado, você sente que a floresta volta a respirar, mas o caminho é longo...\n");
+    }
+    printf("\nHistória até agora:\n%s\n", (*cenario).historia_completa);
+}
 
+void combate(struct Personagem *jogador, struct Personagem *inimigo) {
+    while ((*jogador).vida > 0 && (*inimigo).vida > 0) {
+        int escolha;
+        printf("\nEscolha sua ação:\n");
+        printf("1. Atacar\n");
+        printf("2. Defender\n");
+        printf("Digite sua escolha: ");
+        scanf("%d", &escolha);
+
+        if (escolha == 1) { 
+            int dano = (*jogador).forca - (*inimigo).defesa;
+            if (dano < 0) dano = 0; 
+            (*inimigo).vida -= dano;
+            printf("Você atacou %s causando %d de dano!\n", (*inimigo).nome, dano);
+        } else if (escolha == 2) { 
+            printf("Você se defendeu, reduzindo o próximo dano em 50%%!\n");
+            (*jogador).defesa *= 2; 
+        } else {
+            printf("Ação inválida!\n");
+            continue;
+        }
+
+        if ((*inimigo).vida > 0) {
+            int danoInimigo = (*inimigo).forca - (*jogador).defesa;
+            if (danoInimigo < 0) danoInimigo = 0; 
+            (*jogador).vida -= danoInimigo;
+            printf("%s atacou você causando %d de dano!\n", (*inimigo).nome, danoInimigo);
+        }
+
+        if (escolha == 2) {
+            (*jogador).defesa /= 2;
+        }
+
+        printf("\nStatus Atual:\n");
+        printf("Jogador: %d HP\n", (*jogador).vida);
+        printf("%s: %d HP\n", (*inimigo).nome, (*inimigo).vida);
+    }
+
+    if ((*jogador).vida > 0) {
+        printf("\nVocê derrotou %s!\n", (*inimigo).nome);
+    } else {
+        printf("\nVocê foi derrotado por %s...\n", (*inimigo).nome);
+    }
+}
 
 int main() {
+    struct Cenario cenarios[3];
+    criarCenarios(cenarios);
 
-    struct Personagem p1 = {"Ragnar", "Barbaro", 10, 5, 125};
-    struct Personagem p2 = {"Eva", "Arqueiro", 4, 3, 100};
-    struct Personagem p3 = {"Seraphine", "Mago", 7, 4, 100};
-    struct Personagem p4 = {"Steve", "Ladino", 3, 4, 100};
-    struct Personagem p5 = {"Edmundo", "Guerreiro", 7, 7, 130};
-	struct Cenario c1 = {"Floresta_Negra", "Nesta floresta muitos ja entraram, porem, poucos conseguiram sair. Ha uma lenda que nessa floresta habita um ser mitologico que caca exploradores."};	
-    struct Cenario c2 = {"Nome", "Descricao"};
-    struct Cenario c3 = {"Nome", "Descricao"};
-	
-	int escolha = menu();
-    int perso; 
-    
-	if (escolha==1){
-		printf("Seja bem-vindo ao RPG Unaerp, Escolha dentre os 5 personagens pra seguir com sua aventura.\n\n");
-		printf("1. O barbaro Ragnar.\n2. A arqueira Eva.\n3. A maga Seraphine.\n4. O Ladino Steve.\n5. O guerreiro Edmundo.\n\n");
-		scanf("%d", &perso);	
-	}
-	
-	else if(escolha==2){
-	printf("Falta fazer.");
-	}
-	
-	else if(escolha==3){
-		return 0;
-	}
+    struct Personagem personagens[5] = {
+        {"Ragnar", "Bárbaro", 10, 5, 125},
+        {"Eva", "Arqueira", 4, 3, 100},
+        {"Seraphine", "Maga", 7, 4, 100},
+        {"Steve", "Ladino", 3, 4, 100},
+        {"Edmundo", "Guerreiro", 7, 7, 130}
+    };
 
+    printf("Escolha seu personagem:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%d. %s (%s) [Força=%d, Defesa=%d, Vida=%d] \n", i + 1, personagens[i].nome, personagens[i].classe, personagens[i].forca, personagens[i].defesa, personagens[i].vida);
+    }
 
-	
-	printf("Otima escolha, vamos iniciar nossa aventura!\n\n");
-	printf("Nossa primeira aventura sera na %s, %s", c1.nome, c1.descricao);
-	
-	
-	
-	
-	return 0;
+    int escolha;
+    scanf("%d", &escolha);
+    if (escolha < 1 || escolha > 5) {
+        printf("Escolha inválida!\n");
+        return 0;
+    }
+
+    struct Personagem jogador = personagens[escolha - 1];
+
+    printf("Escolha o cenário:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("%d. %s\n", i + 1, cenarios[i].nome);
+    }
+
+    scanf("%d", &escolha);
+    if (escolha < 1 || escolha > 3) {
+        printf("Escolha inválida!\n");
+        return 0;
+    }
+
+    struct Cenario cenarioEscolhido = cenarios[escolha - 1];
+    mostrarCenario(&cenarioEscolhido);
+
+    for (int i = 0; i < 2; i++) {
+        printf("\n--- Encontro com %s ---\n", cenarioEscolhido.inimigos[i].nome);
+        combate(&jogador, &cenarioEscolhido.inimigos[i]);
+
+        if (jogador.vida <= 0) {
+            printf("\nVocê morreu... Fim de jogo!\n");
+            return 0;
+        }
+
+        contarHistoria(&cenarioEscolhido, i);
+    }
+
+    printf("\nParabéns! Você completou o cenário %s!\n", cenarioEscolhido.nome);
+
+    return 0;
 }
