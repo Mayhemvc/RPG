@@ -19,7 +19,7 @@ struct Cenario {
     char historia_completa[1000];  
 };
 
-char save[200];
+char save[200] = "";
 
 
 void criarCenarios(struct Cenario cenarios[]) {
@@ -97,30 +97,38 @@ void contarHistoria(struct Cenario *cenario, int inimigoIndex, struct Personagem
     if (strcmp((*cenario).nome, "Floresta Negra") == 0) {
         if (inimigoIndex == 0) {
             strcat((*cenario).historia_completa, "Apos derrotar o lobo, voce finalmente consegue chegar no coração da floresta, é um lugar lindo e cheio de vida, voce ate duvida se esta é realmente a floresta negra. Mas logo voce volta a realidade ao encontrar um espectro de luz que o diz para nao avancar pois la é um territorio puro que ninguem poderia entrar. Porem voce com o objetivo de adquirir a Luz Divina, nao escuta as ordem e continua avancando.\n\n");
-        	*save = printf("Concluiu 33%% da floresta negra");
+        	snprintf(save, 200, "Concluiu 33%% da Floresta Negra");
 		} else if (inimigoIndex == 1) {
             strcat((*cenario).historia_completa, "Com o Espectro da Floresta derrotado, a densa névoa começa a se dissipar, revelando o verdadeiro coração da Floresta Negra: um altar antigo, repleto de runas brilhantes. Ao tocá-lo, uma luz divina comeca en envolve-lo você, renovando suas forças e aumentando 100 pontos de vida. porem aparece o Guardião da Luz para impedir.\n\n");
             jogador->vida += 100;
+            snprintf(save, 200, "Concluiu 66%% da Floresta Negra");
         } else if (inimigoIndex == 2) {
             strcat((*cenario).historia_completa, "Derrotando o Guardião da Luz, voce finalmente encontra a Luz Divina e consegue livrar não so a floresta mas tambem todo o reino da escuridão que os cercavam por milenios.\n\n");
-		}
+            snprintf(save, 200, "Concluiu 100%% da Floresta Negra");
+        }
     } else if (strcmp((*cenario).nome, "Caverna Sombria") == 0) {
         if (inimigoIndex == 0) {
             strcat((*cenario).historia_completa, "Com o Troll morto no chão voce segue o rumo para esse tesouro prometido e começa a se questionar se ele realmente existe, mas toda sua luta com o Troll voce acaba despertando a furia de um Morcego Gigante que estava dormindo, irritado o morcego vai em sua direção e voces comecam a lutar\n\n");
+            snprintf(save, 200, "Concluiu 33%% da Caverna Sombria");
         } else if (inimigoIndex == 1) {
             strcat((*cenario).historia_completa, "Apos a vitoria contra o Morcego Gigante voce parte para o final da cavera aonde encontra o tesouro escondido dos Trolls, com ele voce acaba renovando suas forcas e se sente poderoso, ao virar para ir embora voce se depara com o Rei Troll que grita e ordena que devolva seu tesouro.\n\n");
         	jogador->vida += 100;
-		} else if (inimigoIndex == 2) {
+            snprintf(save, 200, "Concluiu 66%% da Caverna Sombria");
+        } else if (inimigoIndex == 2) {
             strcat((*cenario).historia_completa, "Foi uma batalha extremamente cansativa e dificil mas voce consegue derrotar o rei, sendo assim voce para para fora da caverna com todo o tesouro que os Trolss haviam conseguido guardar.\n\n");
+            snprintf(save, 200, "Concluiu 100%% da Caverna Sombria");
         }
     } else if (strcmp((*cenario).nome, "Castelo do Dragão") == 0) {
         if (inimigoIndex == 0) {
             strcat((*cenario).historia_completa, "Ao derrotar o Guarda Esqueleto, o chão do castelo treme, e um rugido aterrorizante ecoa pelos corredores. O pequeno grande Jovem Dragão esta atras de voce e sem medo e piedade voce trava uma dolorosa batalha com ele até que apenas um saia vivo.\n\n");
+            snprintf(save, 200, "Concluiu 33%% da Castelo do Dragão");
         } else if (inimigoIndex == 1) {
             strcat((*cenario).historia_completa, "Com o Jovem Dragão vencido, você caminha pelo covil e encontra uma sala secreta repleta de ouro e artefatos mágicos. Entre eles, um amuleto brilha intensamente, prometendo grandes poderes a quem o usar. Apos colocar o amuleto voce sente o ar ficando quente e uma presença chegando perto, voce descobre que é o Dragão Ancião enfurecido com a morte de seu primogenito.\n\n");
         	jogador->vida += 100;
-		} else if (inimigoIndex == 2) {
+            snprintf(save, 200, "Concluiu 66%% da Castelo do Dragão");
+        } else if (inimigoIndex == 2) {
             strcat((*cenario).historia_completa, "Voce consegue derrotar o ancião mas perde um braço na batalha, mesmo assim voce caminha ate o corpo do dragão e aranca seu coração que vira seu mais novo trofeu de batalha.\n\n");
+            snprintf(save, 200, "Concluiu 100%% da Castelo do Dragão");
         }
     } else {
         strcat((*cenario).historia_completa, "História adicional não definida para este cenário.\n");
@@ -137,8 +145,6 @@ void combate(struct Personagem *jogador, struct Personagem *inimigo) {
         printf("2. Defender\n");
         printf("Digite sua escolha: ");
         scanf("%d", &escolha);
-        
-        
 
         if (escolha == 1) { 
             int dano = (*jogador).forca - (*inimigo).defesa;
@@ -176,28 +182,45 @@ void combate(struct Personagem *jogador, struct Personagem *inimigo) {
     }
 }
 
+void salvarProgresso(char *save) {
+    FILE *fptr = fopen("save.txt", "w");
+    if (fptr == NULL) {
+        printf("Erro ao salvar o progresso.\n");
+        return;
+    }
+    fprintf(fptr, "%s", save);
+    fclose(fptr);
+    printf("Progresso salvo com sucesso.\n");
+}
+
+void carregarProgresso(char *save) {
+    FILE *fptr = fopen("save.txt", "r");
+    if (fptr == NULL) {
+        printf("Nenhum progresso salvo encontrado.\n");
+        return;
+    }
+    fgets(save, 200, fptr);
+    fclose(fptr);
+}
+
 int main() {
-	FILE* fptr;
     setlocale(LC_ALL, "Portuguese");
     struct Cenario cenarios[3];
     criarCenarios(cenarios);
-    
-    fptr = fopen("pessoa.txt", "r");
 
-	if (fptr == NULL) {
-		printf("Falha ao abrir o arquivo \n");
-		exit(1);
-	}else{
-	fread(&save, sizeof(save), 1, fptr);
-	}
-	fclose(fptr);
+    printf("Bem-vindos ao RPG Saga dos Guardiões\n\n");
+
+    carregarProgresso(save);
+    if (strlen(save) > 0) {
+        printf("Progresso carregado: %s\n\n", save);
+    }
 
     struct Personagem personagens[5] = {
         {"Ragnar", "Bárbaro", 10, 5, 200},
-        {"Eva", "Arqueira", 4, 3, 200},
-        {"Seraphine", "Maga", 7, 4, 200},
-        {"Steve", "Ladino", 3, 4, 200},
-        {"Edmundo", "Guerreiro", 7, 7, 200}
+        {"Eva", "Arqueira", 8, 5, 200},
+        {"Seraphine", "Maga", 11, 4, 170},
+        {"Steve", "Ladino", 9, 4, 180},
+        {"Edmundo", "Guerreiro", 7, 7, 250}
     };
 
     printf("Escolha seu personagem:\n");
@@ -240,16 +263,7 @@ int main() {
         contarHistoria(&cenarioEscolhido, i, &jogador, &save);
     }
 	
-	fptr = fopen("pessoa.txt", "w");
-	if (fptr == NULL) {
-		printf("Nenhum arquivo salvo");
-		fclose(fptr);
-		exit(1);	
-	}
-	else {
-		save = fwrite(&save, sizeof(save), 1, fptr);
-		fclose(fptr);
-	}
+	salvarProgresso(save);
 
     printf("\nParabéns! Você completou o cenário %s!\n", cenarioEscolhido.nome);
 
