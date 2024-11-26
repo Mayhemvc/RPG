@@ -97,38 +97,38 @@ void contarHistoria(struct Cenario *cenario, int inimigoIndex, struct Personagem
     if (strcmp((*cenario).nome, "Floresta Negra") == 0) {
         if (inimigoIndex == 0) {
             strcat((*cenario).historia_completa, "Após uma batalha feroz, o lobo jaz no chão, e você se permite um instante de alívio. Mas a floresta não dá tréguas. Seguindo a trilha adiante, a escuridão começa a dar lugar a algo inesperado. Você chega ao coração da floresta, um lugar que desafia todas as expectativas. É um santuário de vida, onde flores cintilam em cores impossíveis e a luz do sol rompe através da névoa em raios dourados. Você mal acredita estar na mesma Floresta Negra.\n\nNo entanto, essa sensação de paz é interrompida por uma figura etérea que se forma diante de você. Um espectro de luz, brilhando como uma chama dançante, ergue-se no centro da clareira. Ele fala com uma voz que ecoa como sinos distantes:\n\n-Pare. Este é um território sagrado. Somente os puros de coração podem avançar. Volte agora, ou pagará o preço.\n\nMas você não veio até aqui para desistir. Seu objetivo é claro: alcançar a Luz Divina, a única esperança de libertar o reino das trevas. Ignorando o aviso, você avança. O espectro hesita por um instante, como se lamentasse sua escolha, e então investe contra você com toda a sua força.\n\n");
-        	snprintf(save, 200, "Concluiu 33% da Floresta Negra");
+        	snprintf(save, 200, "Concluiu 33%% da Floresta Negra");
 		} else if (inimigoIndex == 1) {
             strcat((*cenario).historia_completa, "Após uma batalha árdua, o espectro é derrotado, e a densa névoa ao seu redor começa a se dissipar. Diante de você surge o verdadeiro coração da Floresta Negra: um altar antigo, esculpido em pedra e coberto de runas que brilham como estrelas. O ar vibra com uma energia poderosa. Ao tocar o altar, uma luz cálida e dourada o envolve, restaurando suas forças e concedendo-lhe 100 pontos de vida.\n\nMas o desafio está longe de terminar. De dentro da luz, uma figura colossal emerge. O Guardião da Luz, uma entidade ancestral feita de pura energia, ergue-se diante de você, empunhando uma lâmina de luz ofuscante. Sua voz é grave e imponente:\n\n-Somente os dignos podem portar a Luz Divina. Mostre-me sua verdadeira força.\n\n");
             jogador->vida += 100;
-            snprintf(save, 200, "Concluiu 66% da Floresta Negra");
+            snprintf(save, 200, "Concluiu 66%% da Floresta Negra");
         } else if (inimigoIndex == 2) {
             strcat((*cenario).historia_completa, "Finalmente, com uma última investida, você derrota o Guardião. Ele cai de joelhos, antes de se dissipar em partículas de luz, como estrelas que retornam ao céu.\n\nCom o Guardião vencido, a Luz Divina finalmente se revela completamente. Ela se funde a você, inundando seu ser com um poder indescritível. Quando retorna ao mundo exterior, a Floresta Negra está irreconhecível: o cinza foi substituído por verdes vibrantes, e o ar está carregado de uma sensação de renovação.\n\nGraças à sua coragem, a escuridão que assolava o reino por milênios foi finalmente dissipada. A Luz Divina, agora parte de você, garante que a paz e a prosperidade retornem à terra, e sua jornada torna-se uma lenda contada por gerações.\n\n");
-            snprintf(save, 200, "Concluiu 100% da Floresta Negra");
+            snprintf(save, 200, "Concluiu 100%% da Floresta Negra");
         }
     } else if (strcmp((*cenario).nome, "Caverna Sombria") == 0) {
         if (inimigoIndex == 0) {
             strcat((*cenario).historia_completa, "Depois de uma batalha brutal, o corpo gigantesco do troll cai ao chão com um estrondo que faz a caverna tremer. Com o monstro derrotado, você respira aliviado por um breve momento, mas sua jornada está longe de terminar. Enquanto avança, um pensamento inquietante se instala: \n-será que esse tesouro realmente existe, ou é apenas uma lenda?\n\nA dúvida, no entanto, logo dá lugar ao perigo. O ruído de sua luta despertou um Morcego Gigante, que surge das sombras. Suas asas enormes criam rajadas de vento que apagam sua tocha, mergulhando a caverna na escuridão.\n\n");
-            snprintf(save, 200, "Concluiu 33% da Caverna Sombria");
+            snprintf(save, 200, "Concluiu 33%% da Caverna Sombria");
         } else if (inimigoIndex == 1) {
             strcat((*cenario).historia_completa, "Com seus sentidos aguçados, você luta na penumbra, desferindo golpes certeiros até que, finalmente, o morcego cai derrotado.\n\nExausto, mas determinado, você segue em direção ao coração da caverna. O ar parece mais denso, quase palpável, enquanto você avista um brilho à distância. Após passar por uma abertura estreita, se depara com um salão repleto de riquezas inimagináveis: ouro, joias e artefatos mágicos acumulados ao longo dos séculos pelos trolls. Ao tocar o tesouro, sente uma onda de energia percorrer seu corpo, restaurando 100 pontos de vida.\n\nNo entanto, sua euforia é interrompida por um rugido que faz a caverna inteira estremecer. O Rei Troll, colossal e coberto de armadura, surge de uma passagem oculta. Seus olhos flamejam de ódio ao avistar o tesouro em suas mãos.\n\n-Humano insignificante! Devolva o que pertence ao meu povo, ou enfrentará minha fúria!\n\nSem intenção de recuar, você se prepara para a batalha mais desafiadora de sua vida.\n\n");
         	jogador->vida += 100;
-            snprintf(save, 200, "Concluiu 66% da Caverna Sombria");
+            snprintf(save, 200, "Concluiu 66%% da Caverna Sombria");
         } else if (inimigoIndex == 2) {
             strcat((*cenario).historia_completa, "O embate é longo e cruel; cada golpe trocado deixa marcas profundas no ambiente ao redor. No fim, com um último esforço, você derrota o Rei Troll. Ele cai de joelhos antes de desmoronar, e a caverna finalmente silencia, exceto pelo som de seu coração ainda acelerado.\n\nCarregando o tesouro dos trolls, você deixa a caverna. O brilho do ouro em suas mãos é ofuscado apenas pela luz do sol que invade a entrada. Você respira fundo, sabendo que a jornada foi dura, mas valeu a pena. Sua vitória será lembrada como uma lenda, e o tesouro que conquistou marca o início de uma nova era para sua vida de aventuras.\n\n");
-            snprintf(save, 200, "Concluiu 100% da Caverna Sombria");
+            snprintf(save, 200, "Concluiu 100%% da Caverna Sombria");
         }
     } else if (strcmp((*cenario).nome, "Castelo do Drag o") == 0) {
         if (inimigoIndex == 0) {
             strcat((*cenario).historia_completa, "O confronto é árduo, mas sua determinação prevalece. Após desferir o golpe final, o Guarda Esqueleto desmorona em uma pilha de ossos e poeira, liberando um grito que parece ecoar pelas profundezas do castelo.\n\nAntes que você possa recuperar o fôlego, o chão começa a tremer violentamente. Um rugido avassalador ressoa pelos corredores, e, das sombras, emerge um Jovem Dragão, com escamas reluzentes e olhos flamejantes. Ele é ágil e feroz, atacando com garras afiadas e jatos de fogo. A batalha que se segue é extenuante; cada movimento exige sua máxima habilidade e estratégia.\n\n");
-            snprintf(save, 200, "Concluiu 33% da Castelo do Drag o");
+            snprintf(save, 200, "Concluiu 33%% da Castelo do Dragão");
         } else if (inimigoIndex == 1) {
             strcat((*cenario).historia_completa, "Finalmente, com um golpe certeiro, você derruba a criatura, que cai ao chão com um estrondo. Enquanto a poeira assenta, você explora o covil do dragão e encontra uma sala escondida atrás de uma parede secreta. Lá dentro, é como se tivesse encontrado o paraíso: montanhas de ouro e joias, armas mágicas e pergaminhos antigos que brilham com um poder arcano. No centro do tesouro, um amuleto emana uma luz intensa, quase viva. Ao colocá-lo, sente uma onda de energia percorrer seu corpo, curando feridas e aumentando sua vitalidade em 100 pontos de vida.\n\nMas o ar à sua volta muda. O calor se intensifica, e o chão treme novamente. Um rugido ainda mais profundo e ameaçador ecoa, anunciando a chegada de algo muito maior. Das profundezas do castelo, surge o Dragão Ancião, suas escamas negras como a noite, e seus olhos cheios de fúria.\n\n-MISERÁVEL! VOCÊ MATOU MEU FILHO! PREPARE-SE PARA PAGAR COM A SUA VIDA!\n\nO Dragão Ancião é implacável, sua força e sabedoria milenares o tornam um adversário quase invencível. O combate é épico, e a câmara treme com cada golpe desferido. Chamas consomem tudo ao seu redor, e seus movimentos ficam cada vez mais lentos, mas você não desiste.\n\n");
         	jogador->vida += 100;
-            snprintf(save, 200, "Concluiu 66% da Castelo do Drag o");
+            snprintf(save, 200, "Concluiu 66%% da Castelo do Dragão");
         } else if (inimigoIndex == 2) {
             strcat((*cenario).historia_completa, "Com um último esforço desesperado, desferindo um golpe que consome suas forças, o Dragão Ancião cai, rugindo de dor, até que seu corpo finalmente se torna imóvel.\n\nA vitória, porém, vem com um custo alto: na batalha, você perde um braço, mas a dor é ofuscada pela glória de sua conquista. Manchado de sangue e cinzas, você se aproxima do colossal corpo do dragão e arranca seu coração, um troféu pulsante que simboliza o ápice de sua jornada.\n\nEnquanto sai do castelo, carregando o amuleto e o coração do Dragão Ancião, você sente que o mundo à sua frente mudou. Não é só o ouro ou os artefatos que conquistou, mas a certeza de que agora é uma lenda viva, destinado a feitos ainda maiores.\n\n");
-            snprintf(save, 200, "Concluiu 100% da Castelo do Drag o");
+            snprintf(save, 200, "Concluiu 100%% da Castelo do Dragão");
         }
     } else {
         strcat((*cenario).historia_completa, "História adicional não definida para este cenário.\n");
@@ -216,7 +216,7 @@ int main() {
     }
 
     struct Personagem personagens[5] = {
-        {"Ragnar", "B rbaro", 10, 5, 200},
+        {"Ragnar", "Bárbaro", 10, 5, 200},
         {"Eva", "Arqueira", 8, 5, 200},
         {"Seraphine", "Maga", 11, 4, 170},
         {"Steve", "Ladino", 9, 4, 180},
